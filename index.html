@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heritage Explorer AI</title>
+<style>
+:root{--ink:#2b211a;--brown:#65351f;--gold:#d89b4b;--paper:#fff9f0;--card:#fff;--muted:#725f50}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(120deg,#422313,#8b4b25);color:white;padding:30px 18px;text-align:center}
+header .mark{font-size:42px}h1{margin:4px 0;font-size:clamp(28px,6vw,44px)}header p{margin:5px auto;max-width:650px;color:#f5dfc2}
+nav{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;background:#321b10;padding:12px}nav a{color:white;text-decoration:none;font-weight:600;font-size:14px}
+.hero{padding:38px 18px;text-align:center;background:linear-gradient(120deg,#f2d5a9,#fff0d9)}.hero h2{font-size:clamp(23px,5vw,34px);color:var(--brown);margin:0 0 8px}.hero p{max-width:700px;margin:0 auto 18px}
+main{max-width:1050px;margin:auto;padding:18px}section{padding:20px 0}h2{color:var(--brown);margin:0 0 12px}.intro{color:var(--muted)}
+.controls{display:flex;gap:10px;flex-wrap:wrap}input,select{font:inherit;padding:12px;border:1px solid #cbb59d;border-radius:9px;background:white;min-width:0}input{flex:1;min-width:200px}
+button{border:0;border-radius:9px;background:var(--brown);color:white;padding:12px 17px;font:inherit;font-weight:650;cursor:pointer}button:hover{background:#422313}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:14px}.card{background:var(--card);border:1px solid #ead9c6;border-radius:13px;padding:17px;box-shadow:0 5px 16px #44250d0d}.card h3{margin:0 0 4px;color:#80431f}.place{color:var(--muted);font-size:14px}.pill{display:inline-block;background:#f7e6cf;color:#6a3c20;padding:3px 9px;border-radius:30px;font-size:12px;margin:3px 3px 0 0}
+.panel{background:white;border:1px solid #ead9c6;border-left:5px solid var(--gold);padding:16px;border-radius:10px;margin-top:12px;min-height:48px}
+small,.small{color:var(--muted)}footer{text-align:center;background:#321b10;color:#f7e8d6;padding:24px 12px;margin-top:25px}
+@media(max-width:500px){main{padding:14px}nav{gap:12px}nav a{font-size:13px}.controls{display:grid}.controls input,.controls select,.controls button{width:100%}}
+</style>
+</head>
+<body>
+<header><div class="mark">🏛️ 🇮🇳</div><h1>Heritage Explorer AI</h1><p>An interactive guide to India's monuments, traditions and living cultural knowledge.</p></header>
+<nav><a href="#explore">Explore</a><a href="#guide">AI Guide</a><a href="#iks">IKS Connection</a><a href="#about">About</a></nav>
+<div class="hero"><h2>Discover stories carved in stone</h2><p>Search heritage destinations, explore concise facts, and receive interest-based suggestions from a small knowledge base.</p><a href="#explore"><button>Start exploring ↓</button></a></div>
+<main>
+<section id="explore"><h2>Explore heritage sites</h2><p class="intro">Search by monument, state, or theme.</p><div class="controls"><input id="search" aria-label="Search sites" placeholder="Try Ajanta, Maharashtra, temple..." oninput="renderSites()"></div><div class="grid" id="sites"></div></section>
+<section id="guide"><h2>🤖 Intelligent Heritage Guide</h2><p class="intro">Choose an interest. The recommendation engine matches it to site tags and explains why each result fits.</p><div class="controls"><select id="interest" aria-label="Choose interest"><option value="history">History</option><option value="architecture">Architecture</option><option value="spirituality">Spiritual traditions</option><option value="art">Art and culture</option><option value="nature">Nature</option></select><button onclick="recommend()">Recommend places</button></div><div class="panel" id="recommendResult" aria-live="polite">Your personalized suggestions will appear here.</div>
+<h3>Ask the knowledge assistant</h3><div class="controls"><input id="question" placeholder="Example: What is special about Ellora?" aria-label="Ask a heritage question"><button onclick="ask()">Ask</button></div><div class="panel" id="answer" aria-live="polite">Namaste! Ask about a site in the collection or about IKS.</div></section>
+<section id="iks"><h2>📚 Indian Knowledge Systems connection</h2><div class="card"><p>Indian Knowledge Systems (IKS) include knowledge and practices developed and transmitted across generations in areas such as architecture, arts, philosophy, ecology and community life.</p><p>This project connects IKS with information technology by organizing heritage facts in a searchable digital collection and using interest-based matching to guide exploration. It supports awareness and learning; it does not replace scholarly sources or local community knowledge.</p></div></section>
+<section id="about"><h2>About this project</h2><div class="card"><p><b>Project:</b> Heritage Explorer Using AI</p><p><b>Course:</b> TY BSc IT — Individual IKS Project</p><p><b>Method:</b> Client-side JavaScript, structured heritage knowledge base, keyword search, tag-based recommendation and rule-based question matching.</p><p><b>Limitation:</b> The assistant answers from the included knowledge base. It is not connected to a live generative AI model or external API.</p></div></section>
+</main>
+<footer><b>Heritage Explorer AI</b><br>Preserving cultural knowledge through digital exploration.</footer>
+<script>
+const sites=[
+{name:"Ajanta Caves",state:"Maharashtra",tags:["history","art","spirituality"],summary:"A group of Buddhist rock-cut caves celebrated for murals, sculpture and monastic heritage."},
+{name:"Ellora Caves",state:"Maharashtra",tags:["history","architecture","spirituality","art"],summary:"A remarkable complex of Buddhist, Hindu and Jain monuments carved into rock; the Kailasa temple is a celebrated example."},
+{name:"Taj Mahal",state:"Agra, Uttar Pradesh",tags:["history","architecture","art"],summary:"A marble mausoleum commissioned by Shah Jahan in memory of Mumtaz Mahal, known for its design and craftsmanship."},
+{name:"Hampi",state:"Karnataka",tags:["history","architecture","art"],summary:"The remains of the Vijayanagara capital include temples, market streets and monumental architecture."},
+{name:"Konark Sun Temple",state:"Odisha",tags:["history","architecture","spirituality","art"],summary:"A 13th-century temple conceived as the chariot of the Sun, noted for stone carving and architectural symbolism."},
+{name:"Sanchi Stupa",state:"Madhya Pradesh",tags:["history","architecture","spirituality","art"],summary:"An important Buddhist monument with a great stupa and elaborately carved gateways."},
+{name:"Gateway of India",state:"Mumbai, Maharashtra",tags:["history","architecture"],summary:"A landmark waterfront arch completed in 1924, reflecting a period of Mumbai's colonial-era urban history."},
+{name:"Kaziranga National Park",state:"Assam",tags:["nature","history"],summary:"A protected landscape known for biodiversity and the greater one-horned rhinoceros."}
+];
+function esc(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function renderSites(){const q=document.getElementById("search").value.toLowerCase().trim();const found=sites.filter(s=>(s.name+" "+s.state+" "+s.tags.join(" ")).toLowerCase().includes(q));document.getElementById("sites").innerHTML=found.map(s=>`<article class="card"><h3>${esc(s.name)}</h3><div class="place">📍 ${esc(s.state)}</div><p>${esc(s.summary)}</p>${s.tags.map(t=>`<span class="pill">${esc(t)}</span>`).join("")}</article>`).join("")||'<p>No match found. Try a site or state name.</p>';}
+function recommend(){const tag=document.getElementById("interest").value;const matches=sites.filter(s=>s.tags.includes(tag));document.getElementById("recommendResult").innerHTML=`<b>Suggestions for ${esc(tag)}:</b><br><br>`+matches.map(s=>`<b>${esc(s.name)}</b> — ${esc(s.summary)}`).join("<br><br>")+`<br><br><small>Method: tag matching against the project's curated knowledge base. This is a simple AI-inspired recommendation prototype.</small>`;}
+function ask(){const q=document.getElementById("question").value.toLowerCase().trim();let s=sites.find(x=>q.includes(x.name.toLowerCase())||x.name.toLowerCase().split(" ").some(w=>w.length>3&&q.includes(w)));let answer;if(!q)answer="Please enter a question.";else if(s)answer=`<b>${esc(s.name)}</b><br>${esc(s.summary)}<br><small>State/region: ${esc(s.state)}</small>`;else if(q.includes("iks")||q.includes("knowledge"))answer="IKS refers to knowledge traditions and practices developed in India, including architecture, arts, philosophy, ecology and community knowledge. This project makes selected heritage information searchable and accessible.";else if(q.includes("recommend")||q.includes("how"))answer="Choose an interest in the recommendation section. The system compares your choice with heritage-site tags and returns matching sites.";else answer="I can answer about Ajanta Caves, Ellora Caves, Taj Mahal, Hampi, Konark Sun Temple, Sanchi Stupa, Gateway of India, Kaziranga, or the IKS connection. Try asking about one of these.";document.getElementById("answer").innerHTML=answer;}
+renderSites();
+</script>
+</body></html>
